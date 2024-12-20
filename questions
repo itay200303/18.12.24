@@ -1,0 +1,33 @@
+-- 1. Avg grades every year:
+SELECT exam_year, AVG(grade) AS avg_grade
+FROM grades
+GROUP BY exam_year;
+
+-- 2. Avg grade for every student separated in the year 2024:
+SELECT student_name, avg(grade) AS average_grade
+FROM grades
+WHERE exam_year = 2024
+GROUP BY student_name;
+
+-- 3. For every year, what was the higher grade and the lower grade in every subject:
+SELECT exam_year, subject_name, MAX(grade) AS MAX_grade
+,min(grade) AS MIN_grade
+FROM grades
+GROUP BY exam_year , subject_name
+
+-- 4. For every year, how manny exams were made in every subject:
+SELECT exam_year, subject_name, count(grade_id)
+FROM grades
+GROUP BY exam_year, subject_name
+
+-- 5. What was the subjects that avg grades is above 85?:
+SELECT subject_name
+FROM grades
+GROUP BY subject_name
+HAVING AVG(grade) > 85;
+
+-- 6. How manny grades are above 90?:
+SELECT grade, count(*) AS count
+FROM grades
+WHERE grade > 90
+GROUP BY grade
